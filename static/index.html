@@ -1,0 +1,24 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Server side events</title>
+    <script>
+      function runsse() {
+        const div = document.querySelector('#sse')
+        const eventSource = new EventSource('/sse')
+        eventSource.onmessage = (event) => {
+          if (Number(event.lastEventId) === -1) {
+            eventSource.close()
+          } else {
+            div.innerHTML = `${div.innerHTML}${event.data}<br/>`
+          }
+        }
+      }
+    </script>
+  </head>
+  <body onload="runsse()">
+    <!-- <a href="javascript:runsse()">Get log from server</a> -->
+    <div id="sse" style="border: 1px solid black; padding: 5px;"></div>
+  </body>
+</html>
