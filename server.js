@@ -19,7 +19,8 @@ app.get('/sse', function (req, res) {
   res.setHeader('content-type', 'text/event-stream')
   res.setHeader('connection', 'keep-alive')
 
-  // Why does this fire twice for each client?
+  // Why does this fire twice for each client in Chrome
+  // and Firefox but never Safari?
   req.on('close', () => {
     console.log('closed')
     res.end()
