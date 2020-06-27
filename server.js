@@ -9,7 +9,7 @@ app.use('/', express.static('./static'))
 let clients = []
 let results = []
 
-// Serve the server-side event
+// Serve the server-sent event
 app.get('/sse', function (req, res) {
   startLogging()
   const clientId = uuid()
